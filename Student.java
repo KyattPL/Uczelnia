@@ -1,13 +1,14 @@
-import java.util.ArrayList;
+import java.util.HashSet;
 
-public class Student extends Osoba{
+public class Student extends Osoba {
     private String nrIndeksu;
-    private ArrayList<Kurs> kursy;
+    private HashSet<Kurs> kursy;
     private boolean czyERASMUS;
     private boolean czy1Stopien;
     private boolean czyStacjonarne;
 
-    Student(String imie, String nazwisko, String PESEL, int wiek, Plec plec, String nrIndeksu, ArrayList<Kurs> kursy, boolean czyERASMUS, boolean czy1Stopien, boolean czyStacjonarne){
+    Student(String imie, String nazwisko, String PESEL, int wiek, Plec plec, String nrIndeksu, HashSet<Kurs> kursy,
+            boolean czyERASMUS, boolean czy1Stopien, boolean czyStacjonarne) {
         super(imie, nazwisko, PESEL, wiek, plec);
         this.nrIndeksu = nrIndeksu;
         this.kursy = kursy;
@@ -17,62 +18,63 @@ public class Student extends Osoba{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String stopien;
         String rodzaj;
 
-        if (czy1Stopien){
+        if (czy1Stopien) {
             stopien = "Pierwszy";
         } else {
             stopien = "Drugi";
         }
 
-        if (czyStacjonarne){
+        if (czyStacjonarne) {
             rodzaj = "Stacjonarne";
         } else {
             rodzaj = "Niestacjonarne";
         }
 
-        return (imie + " " + nazwisko + " " + PESEL + "   wiek: " + wiek + " plec: " + plec.toString() + " nrIndeksu: " + nrIndeksu + " ERASMUS: " + czyERASMUS + " Stopien: " + stopien + " Rodzaj: " + rodzaj);
+        return (imie + " " + nazwisko + " " + PESEL + "   wiek: " + wiek + " plec: " + plec.toString() + " nrIndeksu: "
+                + nrIndeksu + " ERASMUS: " + czyERASMUS + " Stopien: " + stopien + " Rodzaj: " + rodzaj);
     }
 
-    public String getNrIndeksu(){
+    public String getNrIndeksu() {
         return this.nrIndeksu;
     }
 
-    public ArrayList<Kurs> getKursy(){
+    public HashSet<Kurs> getKursy() {
         return this.kursy;
     }
 
-    public boolean getCzyERASMUS(){
+    public boolean getCzyERASMUS() {
         return this.czyERASMUS;
     }
 
-    public boolean getCzy1Stopien(){
+    public boolean getCzy1Stopien() {
         return this.czy1Stopien;
     }
 
-    public boolean getCzyStacjonarne(){
+    public boolean getCzyStacjonarne() {
         return this.czyStacjonarne;
     }
 
-    public void setNrIndeksu(String nrIndeksu){
+    public void setNrIndeksu(String nrIndeksu) {
         this.nrIndeksu = nrIndeksu;
     }
 
-    public void setKursy(ArrayList<Kurs> kursy){
+    public void setKursy(HashSet<Kurs> kursy) {
         this.kursy = kursy;
     }
 
-    public void setCzyERASMUS(boolean czyERASMUS){
+    public void setCzyERASMUS(boolean czyERASMUS) {
         this.czyERASMUS = czyERASMUS;
     }
 
-    public void setCzy1Stopien(boolean czy1Stopien){
+    public void setCzy1Stopien(boolean czy1Stopien) {
         this.czy1Stopien = czy1Stopien;
     }
 
-    public void setCzyStacjonarne(boolean czyStacjonarne){
+    public void setCzyStacjonarne(boolean czyStacjonarne) {
         this.czyStacjonarne = czyStacjonarne;
     }
 }
