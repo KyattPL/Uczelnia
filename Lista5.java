@@ -176,7 +176,7 @@ public class Lista5 {
             for (Osoba k : zbiorOsob) {
                 if (k instanceof PracownikUczelni) {
                     if (k.getNazwisko().equals(zapytanieStr)) {
-                        k.toString();
+                        System.out.println(k.toString());
                     }
                 }
             }
@@ -186,7 +186,7 @@ public class Lista5 {
                 if (k instanceof PracownikUczelni) {
                     PracownikUczelni prac = (PracownikUczelni) k;
                     if (prac.getStaz() == zapytanie) {
-                        k.toString();
+                        System.out.println(k.toString());
                     }
                 }
             }
@@ -202,7 +202,7 @@ public class Lista5 {
                 if (k instanceof Student) {
                     Student stud = (Student) k;
                     if (stud.getNazwisko().equals(zapytanieStr)) {
-                        k.toString();
+                        System.out.println(k.toString());
                     }
                 }
             }
@@ -212,7 +212,7 @@ public class Lista5 {
                 if (k instanceof Student) {
                     Student stud = (Student) k;
                     if (stud.getCzy1Stopien() == zapytanieBool) {
-                        k.toString();
+                        System.out.println(k.toString());
                     }
                 }
             }
@@ -226,14 +226,14 @@ public class Lista5 {
             String zapytanieStr = getString(scan);
             for (Kurs k : zbiorDostepnychKursow) {
                 if (k.getNazwiskoProwadzacego().equals(zapytanieStr)) {
-                    k.toString();
+                    System.out.println(k.toString());
                 }
             }
         } else if (x == 2) {
             int zapytanie = getInt(scan);
             for (Kurs k : zbiorDostepnychKursow) {
                 if (k.getPunktyECTS() == zapytanie) {
-                    k.toString();
+                    System.out.println(k.toString());
                 }
             }
         }
@@ -261,10 +261,10 @@ public class Lista5 {
         for (Osoba k : zbiorOsob) {
             if (k instanceof PracownikBD) {
                 PracownikBD temp = (PracownikBD) k;
-                temp.toString();
+                System.out.println(temp.toString());
             } else if (k instanceof PracownikAdministracyjny) {
                 PracownikAdministracyjny temp = (PracownikAdministracyjny) k;
-                temp.toString();
+                System.out.println(temp.toString());
             }
         }
     }
@@ -273,14 +273,14 @@ public class Lista5 {
         for (Osoba k : zbiorOsob) {
             if (k instanceof Student) {
                 Student temp = (Student) k;
-                temp.toString();
+                System.out.println(temp.toString());
             }
         }
     }
 
     public static void wyswietlKursy() {
         for (Kurs k : zbiorDostepnychKursow) {
-            k.toString();
+            System.out.println(k.toString());
         }
     }
 
