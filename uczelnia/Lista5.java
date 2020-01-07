@@ -3,6 +3,7 @@ package uczelnia;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import porownywarki.*;
@@ -54,6 +55,7 @@ public class Lista5 {
         System.out.println("3. Wyswietl wszystkich (Pracownikow, Studentow, Kursy)");
         System.out.println("4. Wyczysc zbior studentow, pracownikow i kursow");
         System.out.println("5. Posortuj");
+        System.out.println("6. Usun po kluczu");
         System.out.println("0. Wyjdz");
     }
 
@@ -74,6 +76,9 @@ public class Lista5 {
             break;
         case 5:
             posortuj(scan);
+            break;
+        case 6:
+            usun(scan);
             break;
         default:
             break;
@@ -180,6 +185,86 @@ public class Lista5 {
         int punktyECTS = OperacjeNaDanych.getInt(scan);
         Kurs k = new Kurs(nazwa, imieProwadzacego, nazwiskoProwadzacego, punktyECTS);
         zbiorDostepnychKursow.add(k);
+    }
+
+    public static void usun(Scanner scan){
+        System.out.println("Co chcesz usunac: 1. Osobe, 2. Kurs");
+        int input = OperacjeNaDanych.getInt(scan);
+        switch (input) {
+            case 1:
+                usunOsobe(scan);
+                break;
+            case 2:
+                usunKurs(scan);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static void usunOsobe(Scanner scan) {
+        Iterator<Osoba> it = zbiorOsob.iterator();
+        System.out.println("Usun po: 1. Imieniu, 2. Nazwisku, 3. Wieku");
+        int input = OperacjeNaDanych.getInt(scan);
+        switch (input) {
+            case 1:
+                System.out.print("Podaj imie: ");
+                String temp = OperacjeNaDanych.getString(scan);
+                while (it.hasNext()) {
+                    if (it.next().getImie().equals(temp)) {
+                        it.remove();
+                    }
+                }
+                break;
+            case 2:
+                System.out.print("Podaj nazwisko: ");
+                String temp2 = OperacjeNaDanych.getString(scan);
+                while (it.hasNext()) {
+                    if (it.next().getNazwisko().equals(temp2)) {
+                        it.remove();
+                    }
+                }
+                break;
+            case 3:
+                System.out.print("Podaj wiek: ");
+                int temp3 = OperacjeNaDanych.getInt(scan);
+                while (it.hasNext()) {
+                    if (it.next().getWiek() == temp3) {
+                        it.remove();
+                    }
+                }
+                break;
+            default:
+                break;
+            }
+    }
+
+    public static void usunKurs(Scanner scan) {
+        Iterator<Kurs> it = zbiorDostepnychKursow.iterator();
+        System.out.println("Usun po: 1. Nazwisku prowadzacego, 2. Punktach ECTS");
+        int input = OperacjeNaDanych.getInt(scan);
+        switch (input) {
+            case 1:
+                System.out.print("Podaj nazwisko: ");
+                String temp = OperacjeNaDanych.getString(scan);
+                while (it.hasNext()) {
+                    if (it.next().getNazwiskoProwadzacego().equals(temp)) {
+                        it.remove();
+                    }
+                }
+                break;
+            case 2:
+                System.out.print("Podaj ECTS: ");
+                int temp2 = OperacjeNaDanych.getInt(scan);
+                while (it.hasNext()){
+                    if (it.next().getPunktyECTS() == temp2) {
+                        it.remove();
+                    }
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     public static void wyszukaj(Scanner scan) {

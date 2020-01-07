@@ -39,8 +39,10 @@ public class OperacjeNaDanych {
         boolean x;
         try {
             x = scan.nextBoolean();
+            scan.nextLine();
         } catch (Exception e) {
             System.out.println("Podaj poprawny boolean: ");
+            scan.nextLine();
             x = getBoolean(scan);
         }
         return x;
