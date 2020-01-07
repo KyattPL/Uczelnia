@@ -1,9 +1,16 @@
-public abstract class PracownikUczelni extends Osoba {
-    protected int staz;
+package uczelnia;
+
+import java.io.Serializable;
+
+public abstract class PracownikUczelni extends Osoba implements Serializable {
+
+    static final long serialVersionUID = 420;
+
+    protected double staz;
     protected String stanowisko;
     protected int pensja;
 
-    PracownikUczelni(String imie, String nazwisko, String PESEL, int wiek, Plec plec, int staz, String stanowisko,
+    PracownikUczelni(String imie, String nazwisko, String PESEL, int wiek, Plec plec, double staz, String stanowisko,
             int pensja) {
         super(imie, nazwisko, PESEL, wiek, plec);
         this.staz = staz;
@@ -23,7 +30,7 @@ public abstract class PracownikUczelni extends Osoba {
                 + " stanowisko: " + stanowisko + " pensja: " + pensja);
     }
 
-    public int getStaz() {
+    public double getStaz() {
         return this.staz;
     }
 
@@ -35,7 +42,7 @@ public abstract class PracownikUczelni extends Osoba {
         return this.pensja;
     }
 
-    public void setStaz(int staz) {
+    public void setStaz(double staz) {
         this.staz = staz;
     }
 

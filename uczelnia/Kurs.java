@@ -1,4 +1,11 @@
-public class Kurs {
+package uczelnia;
+
+import java.io.Serializable;
+
+public class Kurs implements Serializable {
+
+    static final long serialVersionUID = 420;
+
     private String nazwa;
     private String imieProwadzacego;
     private String nazwiskoProwadzacego;

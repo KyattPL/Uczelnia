@@ -1,6 +1,12 @@
+package uczelnia;
+
+import java.io.Serializable;
 import java.util.HashSet;
 
-public class Student extends Osoba {
+public class Student extends Osoba implements Serializable{
+
+    static final long serialVersionUID = 420;
+
     private String nrIndeksu;
     private HashSet<Kurs> kursy;
     private boolean czyERASMUS;
@@ -15,6 +21,15 @@ public class Student extends Osoba {
         this.czyERASMUS = czyERASMUS;
         this.czy1Stopien = czy1Stopien;
         this.czyStacjonarne = czyStacjonarne;
+    }
+    
+    Student(){
+        super("dumb", "test", "43242342", 19, Plec.M);
+        this.nrIndeksu = "123123";
+        this.kursy = null;
+        this.czyERASMUS = false;
+        this.czy1Stopien = false;
+        this.czyStacjonarne = false;
     }
 
     @Override

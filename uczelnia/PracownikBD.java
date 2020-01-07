@@ -1,7 +1,14 @@
-public class PracownikBD extends PracownikUczelni {
+package uczelnia;
+
+import java.io.Serializable;
+
+public class PracownikBD extends PracownikUczelni implements Serializable{
+
+    static final long serialVersionUID = 420;
+
     private int punktacja;
 
-    PracownikBD(String imie, String nazwisko, String PESEL, int wiek, Plec plec, int staz, String stanowisko,
+    PracownikBD(String imie, String nazwisko, String PESEL, int wiek, Plec plec, double staz, String stanowisko,
             int pensja, int punktacja) {
         super(imie, nazwisko, PESEL, wiek, plec, staz, stanowisko, pensja);
         this.punktacja = punktacja;

@@ -1,4 +1,11 @@
-public abstract class Osoba {
+package uczelnia;
+
+import java.io.Serializable;
+
+public abstract class Osoba implements Serializable {
+
+    static final long serialVersionUID = 420;
+
     protected String imie;
     protected String nazwisko;
     protected String PESEL;
