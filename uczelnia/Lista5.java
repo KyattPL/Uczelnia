@@ -41,7 +41,7 @@ public class Lista5 {
         OperacjeNaDanych.zapiszKursy(zbiorDostepnychKursow);
     }
 
-    public static void wczytajPorownywarki(){
+    public static void wczytajPorownywarki() {
         porNazw = new PorownajNazwisko();
         porImie = new PorownajImie();
         porWiek = new PorownajWiek();
@@ -187,18 +187,18 @@ public class Lista5 {
         zbiorDostepnychKursow.add(k);
     }
 
-    public static void usun(Scanner scan){
+    public static void usun(Scanner scan) {
         System.out.println("Co chcesz usunac: 1. Osobe, 2. Kurs");
         int input = OperacjeNaDanych.getInt(scan);
         switch (input) {
-            case 1:
-                usunOsobe(scan);
-                break;
-            case 2:
-                usunKurs(scan);
-                break;
-            default:
-                break;
+        case 1:
+            usunOsobe(scan);
+            break;
+        case 2:
+            usunKurs(scan);
+            break;
+        default:
+            break;
         }
     }
 
@@ -207,36 +207,36 @@ public class Lista5 {
         System.out.println("Usun po: 1. Imieniu, 2. Nazwisku, 3. Wieku");
         int input = OperacjeNaDanych.getInt(scan);
         switch (input) {
-            case 1:
-                System.out.print("Podaj imie: ");
-                String temp = OperacjeNaDanych.getString(scan);
-                while (it.hasNext()) {
-                    if (it.next().getImie().equals(temp)) {
-                        it.remove();
-                    }
+        case 1:
+            System.out.print("Podaj imie: ");
+            String temp = OperacjeNaDanych.getString(scan);
+            while (it.hasNext()) {
+                if (it.next().getImie().equals(temp)) {
+                    it.remove();
                 }
-                break;
-            case 2:
-                System.out.print("Podaj nazwisko: ");
-                String temp2 = OperacjeNaDanych.getString(scan);
-                while (it.hasNext()) {
-                    if (it.next().getNazwisko().equals(temp2)) {
-                        it.remove();
-                    }
-                }
-                break;
-            case 3:
-                System.out.print("Podaj wiek: ");
-                int temp3 = OperacjeNaDanych.getInt(scan);
-                while (it.hasNext()) {
-                    if (it.next().getWiek() == temp3) {
-                        it.remove();
-                    }
-                }
-                break;
-            default:
-                break;
             }
+            break;
+        case 2:
+            System.out.print("Podaj nazwisko: ");
+            String temp2 = OperacjeNaDanych.getString(scan);
+            while (it.hasNext()) {
+                if (it.next().getNazwisko().equals(temp2)) {
+                    it.remove();
+                }
+            }
+            break;
+        case 3:
+            System.out.print("Podaj wiek: ");
+            int temp3 = OperacjeNaDanych.getInt(scan);
+            while (it.hasNext()) {
+                if (it.next().getWiek() == temp3) {
+                    it.remove();
+                }
+            }
+            break;
+        default:
+            break;
+        }
     }
 
     public static void usunKurs(Scanner scan) {
@@ -244,26 +244,26 @@ public class Lista5 {
         System.out.println("Usun po: 1. Nazwisku prowadzacego, 2. Punktach ECTS");
         int input = OperacjeNaDanych.getInt(scan);
         switch (input) {
-            case 1:
-                System.out.print("Podaj nazwisko: ");
-                String temp = OperacjeNaDanych.getString(scan);
-                while (it.hasNext()) {
-                    if (it.next().getNazwiskoProwadzacego().equals(temp)) {
-                        it.remove();
-                    }
+        case 1:
+            System.out.print("Podaj nazwisko: ");
+            String temp = OperacjeNaDanych.getString(scan);
+            while (it.hasNext()) {
+                if (it.next().getNazwiskoProwadzacego().equals(temp)) {
+                    it.remove();
                 }
-                break;
-            case 2:
-                System.out.print("Podaj ECTS: ");
-                int temp2 = OperacjeNaDanych.getInt(scan);
-                while (it.hasNext()){
-                    if (it.next().getPunktyECTS() == temp2) {
-                        it.remove();
-                    }
+            }
+            break;
+        case 2:
+            System.out.print("Podaj ECTS: ");
+            int temp2 = OperacjeNaDanych.getInt(scan);
+            while (it.hasNext()) {
+                if (it.next().getPunktyECTS() == temp2) {
+                    it.remove();
                 }
-                break;
-            default:
-                break;
+            }
+            break;
+        default:
+            break;
         }
     }
 
@@ -361,58 +361,58 @@ public class Lista5 {
         System.out.println("Posortuj 1. Pracownikow i studentow, 2. Kursy");
         int wybor = OperacjeNaDanych.getInt(scan);
         switch (wybor) {
-            case 1:
-                System.out.println("Sortuj po: 1. Nazwisko, 2. Nazwisko i Imie, 3. Nazwisko i Wiek");
-                int input = OperacjeNaDanych.getInt(scan);
-                posortujOsoby(input);
-                break;
-            case 2:
-                System.out.println("Sortuj po: 1. Nazwisko prowadzacego, 2. Liczba pkt ECTS");
-                int input2 = OperacjeNaDanych.getInt(scan);
-                posortujKursy(input2);
-                break;
-            default:
-                break;
-        }
-    }
-    
-    public static void posortujOsoby(int input){
-        switch (input) {
-            case 1:
-                Collections.sort(zbiorOsob, porNazw);
-                break;
-            case 2:
-                Collections.sort(zbiorOsob, porNazw);
-                Collections.sort(zbiorOsob, porImie);
-                break;
-            case 3:
-                Collections.sort(zbiorOsob, porNazw);
-                Collections.sort(zbiorOsob, porWiek);
-                break;
-            default:
-                posortujOsoby(1);
-                break;
+        case 1:
+            System.out.println("Sortuj po: 1. Nazwisko, 2. Nazwisko i Imie, 3. Nazwisko i Wiek");
+            int input = OperacjeNaDanych.getInt(scan);
+            posortujOsoby(input);
+            break;
+        case 2:
+            System.out.println("Sortuj po: 1. Nazwisko prowadzacego, 2. Liczba pkt ECTS");
+            int input2 = OperacjeNaDanych.getInt(scan);
+            posortujKursy(input2);
+            break;
+        default:
+            break;
         }
     }
 
-    public static void posortujKursy(int input){
+    public static void posortujOsoby(int input) {
+        switch (input) {
+        case 1:
+            Collections.sort(zbiorOsob, porNazw);
+            break;
+        case 2:
+            Collections.sort(zbiorOsob, porNazw);
+            Collections.sort(zbiorOsob, porImie);
+            break;
+        case 3:
+            Collections.sort(zbiorOsob, porNazw);
+            Collections.sort(zbiorOsob, porWiek);
+            break;
+        default:
+            posortujOsoby(1);
+            break;
+        }
+    }
+
+    public static void posortujKursy(int input) {
         ArrayList<Kurs> temp = new ArrayList<Kurs>(zbiorDostepnychKursow);
         switch (input) {
-            case 1:
-                Collections.sort(temp, porNazwKurs);
-                for (Kurs k : temp) {
-                    System.out.println(k.toString());
-                }
-                break;
-            case 2:
-                Collections.sort(temp, porECTS);
-                for (Kurs k : temp) {
-                    System.out.println(k.toString());
-                }
-                break;
-            default:
-                posortujKursy(1);
-                break;
+        case 1:
+            Collections.sort(temp, porNazwKurs);
+            for (Kurs k : temp) {
+                System.out.println(k.toString());
+            }
+            break;
+        case 2:
+            Collections.sort(temp, porECTS);
+            for (Kurs k : temp) {
+                System.out.println(k.toString());
+            }
+            break;
+        default:
+            posortujKursy(1);
+            break;
         }
     }
 

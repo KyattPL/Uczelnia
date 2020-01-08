@@ -48,7 +48,7 @@ public class OperacjeNaDanych {
         return x;
     }
 
-    public static void zapiszOsoby(ArrayList<Osoba> zbiorOsob){
+    public static void zapiszOsoby(ArrayList<Osoba> zbiorOsob) {
         ObjectOutputStream os = null;
         try {
             os = new ObjectOutputStream(new FileOutputStream("daneOsob.ser"));
@@ -60,13 +60,13 @@ public class OperacjeNaDanych {
         } finally {
             try {
                 os.close();
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static void wczytajOsoby(ArrayList<Osoba> zbiorOsob){
+    public static void wczytajOsoby(ArrayList<Osoba> zbiorOsob) {
         ObjectInputStream is = null;
         boolean isEmpty = false;
         try {
@@ -89,20 +89,20 @@ public class OperacjeNaDanych {
                 }
             }
             is.close();
-        } catch (EOFException e){
-            
-        } catch (Exception e){
+        } catch (EOFException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
                 is.close();
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static void zapiszKursy(HashSet<Kurs> kursy){
+    public static void zapiszKursy(HashSet<Kurs> kursy) {
         ObjectOutputStream os = null;
         try {
             os = new ObjectOutputStream(new FileOutputStream("daneKursow.ser"));
@@ -121,12 +121,12 @@ public class OperacjeNaDanych {
         }
     }
 
-    public static void wczytajKursy(HashSet<Kurs> kursy){
+    public static void wczytajKursy(HashSet<Kurs> kursy) {
         ObjectInputStream is = null;
         boolean isEmpty = false;
         try {
             is = new ObjectInputStream(new FileInputStream("daneKursow.ser"));
-            while (!isEmpty){
+            while (!isEmpty) {
                 Object obj = is.readObject();
                 if (obj != null) {
                     if (obj instanceof Kurs) {

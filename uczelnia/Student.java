@@ -3,7 +3,7 @@ package uczelnia;
 import java.io.Serializable;
 import java.util.HashSet;
 
-public class Student extends Osoba implements Serializable{
+public class Student extends Osoba implements Serializable {
 
     static final long serialVersionUID = 420;
 
@@ -22,8 +22,8 @@ public class Student extends Osoba implements Serializable{
         this.czy1Stopien = czy1Stopien;
         this.czyStacjonarne = czyStacjonarne;
     }
-    
-    Student(){
+
+    Student() {
         super("dumb", "test", "43242342", 19, Plec.M);
         this.nrIndeksu = "123123";
         this.kursy = null;
