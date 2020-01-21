@@ -3,7 +3,7 @@ package uczelnia;
 import java.io.Serializable;
 
 public class PracownikAdministracyjny extends PracownikUczelni implements Serializable {
-    
+
     static final long serialVersionUID = 420;
 
     private int liczbaNadgodzin;

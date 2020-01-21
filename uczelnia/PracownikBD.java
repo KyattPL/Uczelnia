@@ -2,7 +2,7 @@ package uczelnia;
 
 import java.io.Serializable;
 
-public class PracownikBD extends PracownikUczelni implements Serializable{
+public class PracownikBD extends PracownikUczelni implements Serializable {
 
     static final long serialVersionUID = 420;
 
