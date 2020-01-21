@@ -19,6 +19,23 @@ public abstract class PracownikUczelni extends Osoba implements Serializable {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == null){
+            return false;
+        } else if (!(obj instanceof PracownikUczelni)){
+            return false;
+        } else if (obj == this) {
+            return true;
+        }
+        return getPESEL().equals(((PracownikUczelni) obj).getPESEL());
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.parseInt(getPESEL());
+    }
+
+    @Override
     public String toString() {
         String tempPlec;
         if (plec == Plec.M) {

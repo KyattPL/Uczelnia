@@ -33,6 +33,23 @@ public class Student extends Osoba implements Serializable{
     }
 
     @Override
+    public int hashCode() {
+        return Integer.parseInt(getNrIndeksu());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        } else if (!(obj instanceof Student)){
+            return false;
+        } else if (obj == this) {
+            return true;
+        }
+        return this.getNrIndeksu().equals(((Student) obj).getNrIndeksu());
+    }
+
+    @Override
     public String toString() {
         String stopien;
         String rodzaj;

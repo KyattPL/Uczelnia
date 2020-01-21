@@ -56,6 +56,7 @@ public class Lista5 {
         System.out.println("4. Wyczysc zbior studentow, pracownikow i kursow");
         System.out.println("5. Posortuj");
         System.out.println("6. Usun po kluczu");
+        System.out.println("7. Usun HashSetem");
         System.out.println("0. Wyjdz");
     }
 
@@ -79,6 +80,9 @@ public class Lista5 {
             break;
         case 6:
             usun(scan);
+            break;
+        case 7:
+            usunHashSetem();
             break;
         default:
             break;
@@ -458,6 +462,28 @@ public class Lista5 {
     public static void wyswietlKursy() {
         for (Kurs k : zbiorDostepnychKursow) {
             System.out.println(k.toString());
+        }
+    }
+
+    public static void usunHashSetem() {
+        HashSet<Student> setStudentow = new HashSet<Student>();
+        HashSet<PracownikUczelni> setPracownikow = new HashSet<PracownikUczelni>();
+        
+        for (Osoba o : zbiorOsob) {
+            if (o instanceof Student) {
+                System.out.println(o.hashCode());
+                setStudentow.add((Student) o);
+            }
+            else if (o instanceof PracownikUczelni) {
+                setPracownikow.add((PracownikUczelni) o);
+            }
+        }
+
+        for (Student s : setStudentow){
+            System.out.println(s.toString());
+        }
+        for (PracownikUczelni p : setPracownikow) {
+            System.out.println(p.toString());
         }
     }
 }
