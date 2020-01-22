@@ -38,6 +38,9 @@ public class Okienko {
         przycisk2.addActionListener(new Przycisk2());
         przycisk3.addActionListener(new Przycisk3());
         przycisk4.addActionListener(new Przycisk4());
+        przycisk5.addActionListener(new Przycisk5());
+        przycisk6.addActionListener(new Przycisk6());
+        przycisk7.addActionListener(new Przycisk7());
         przycisk8.addActionListener(new Przycisk8());
         przycisk9.addActionListener(new Przycisk9());
 
@@ -193,6 +196,71 @@ public class Okienko {
         public void actionPerformed(ActionEvent e) {
             uczelnia.Lista5.zbiorDostepnychKursow.clear();
             uczelnia.Lista5.zbiorOsob.clear();
+        }
+    }
+
+    class Przycisk5 implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e){
+            JList<String> possibleValues = new JList<String>(new String[] {"Pracownikow i studentow", "Kursy"});
+            JOptionPane.showMessageDialog(null, possibleValues, "Posortuj", JOptionPane.PLAIN_MESSAGE);
+            int index = possibleValues.getSelectedIndex() + 1;
+            switch(index){
+                case 1:
+                    JList<String> sortByWhat = new JList<String>(new String[] {"Nazwisko", "Nazwisko i Imie", "Nazwisko i wiek"});
+                    JOptionPane.showMessageDialog(null, sortByWhat, "Po czym", JOptionPane.PLAIN_MESSAGE);
+                    int choice = sortByWhat.getSelectedIndex() + 1;
+                    uczelnia.Lista5.posortujOsoby(choice);
+                    break;
+                case 2:
+                    JList<String> sortByWhat2 = new JList<String>(new String[] {"Nazwisko", "ECTS"});
+                    JOptionPane.showMessageDialog(null, sortByWhat2, "Po czym", JOptionPane.PLAIN_MESSAGE);
+                    int choice2 = sortByWhat2.getSelectedIndex() + 1;
+                    text.setText("");
+                    text.append(uczelnia.Lista5.posortujKursy(choice2));
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    class Przycisk6 implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e){
+            JList<String> possibleValues = new JList<String>(new String[] {"Osoba", "Kurs"});
+            JOptionPane.showMessageDialog(null, possibleValues, "Co usunac", JOptionPane.PLAIN_MESSAGE);
+            int index = possibleValues.getSelectedIndex() + 1;
+            switch (index) {
+                case 1:
+                    JList<String> deleteBy1 = new JList<String>(new String[] {"Imie", "Nazwisko", "Wiek"});
+                    JOptionPane.showMessageDialog(null, deleteBy1, "Po czym usunac", JOptionPane.PLAIN_MESSAGE);
+                    int choice1 = deleteBy1.getSelectedIndex() + 1;
+                    String input1 = JOptionPane.showInputDialog(null, "Podaj", "Podaj", JOptionPane.OK_OPTION);
+                    uczelnia.Lista5.usunOsobe(choice1, input1);
+                    break;
+                case 2:
+                    JList<String> deleteBy2 = new JList<String>(new String[] {"Nazwisko", "ECTS"});
+                    JOptionPane.showMessageDialog(null, deleteBy2, "Po czym usunac", JOptionPane.PLAIN_MESSAGE);
+                    int choice2 = deleteBy2.getSelectedIndex() + 1;
+                    String input2 = JOptionPane.showInputDialog(null, "Podaj", "Podaj", JOptionPane.OK_OPTION);
+                    uczelnia.Lista5.usunKurs(choice2, input2);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    class Przycisk7 implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e){
+            String s = uczelnia.Lista5.usunHashSetem();
+            text.setText("");
+            text.append(s);
         }
     }
 

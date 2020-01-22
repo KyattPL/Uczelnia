@@ -32,9 +32,7 @@ public class Lista5 {
         Okienko okno = new Okienko();
 
         while (!czyWyjscie) {
-            wyswietlMenu();
             wybor = OperacjeNaDanych.getInt(scan);
-            wywolajOpcje(wybor, scan);
             if (wybor == 0) {
                 czyWyjscie = true;
             }
@@ -51,54 +49,6 @@ public class Lista5 {
         porNazwKurs = new PorownajNazwiskoKurs();
         porECTS = new PorownajECTS();
     }
-
-    public static void wyswietlMenu() {
-        System.out.println("1. Dodaj (Pracownika, Studenta, Kurs)");
-        System.out.println("2. Wyszukaj po kryterium (Pracownika, Studenta, Kurs)");
-        System.out.println("3. Wyswietl wszystkich (Pracownikow, Studentow, Kursy)");
-        System.out.println("4. Wyczysc zbior studentow, pracownikow i kursow");
-        System.out.println("5. Posortuj");
-        System.out.println("6. Usun po kluczu");
-        System.out.println("7. Usun HashSetem");
-        System.out.println("0. Wyjdz");
-    }
-
-    public static void wywolajOpcje(int wybor, Scanner scan) {
-        switch (wybor) {
-        case 1:
-            // dodajDoKolekcji(0);
-            break;
-        case 2:
-            // wyszukaj(scan);
-            break;
-        case 3:
-            wyswietlWszystko(0);
-            break;
-        case 4:
-            zbiorOsob.clear();
-            zbiorDostepnychKursow.clear();
-            break;
-        case 5:
-            posortuj(scan);
-            break;
-        case 6:
-            usun(scan);
-            break;
-        case 7:
-            usunHashSetem();
-            break;
-        default:
-            break;
-        }
-    }
-
-    /*
-     * public static void dodajDoKolekcji(int wybor) { System.out.
-     * println("Dodaj: 1. Pracownika BD, 2. Pracownika Administracyjnego, 3. Studenta, 4. Kurs"
-     * ); String s = ""; switch (wybor) { case 1: s = dodajPracownika(1); break;
-     * case 2: s = dodajPracownika(2); break; case 3: dodajStudenta(); break; case
-     * 4: dodajKurs(new ArrayList<String>()); break; default: break; } }
-     */
 
     public static void dodajPracownika(int wybor, ArrayList<String> inputList) {
 
@@ -150,21 +100,6 @@ public class Lista5 {
         zbiorOsob.add(stud);
     }
 
-    public static void przydzielKursy(HashSet<Kurs> kursyStudenta, Scanner scan) {
-        int i = 1;
-        Kurs[] zbior = zbiorDostepnychKursow.toArray(new Kurs[zbiorDostepnychKursow.size()]);
-        for (Kurs k : zbior) {
-            System.out.println(i + ". " + k.getNazwa());
-            i++;
-        }
-        System.out.println("Dodaj wszystkie kursy studenta (Podaj liczbe). '0' zeby wyjsc.");
-        int input = OperacjeNaDanych.getInt(scan);
-        while (input != 0) {
-            kursyStudenta.add(zbior[input - 1]);
-            input = OperacjeNaDanych.getInt(scan);
-        }
-    }
-
     public static void dodajKurs(ArrayList<String> lista) {
         String nazwa = lista.get(0);
         String imieProwadzacego = lista.get(1);
@@ -174,29 +109,13 @@ public class Lista5 {
         zbiorDostepnychKursow.add(k);
     }
 
-    public static void usun(Scanner scan) {
-        System.out.println("Co chcesz usunac: 1. Osobe, 2. Kurs");
-        int input = OperacjeNaDanych.getInt(scan);
-        switch (input) {
-        case 1:
-            usunOsobe(scan);
-            break;
-        case 2:
-            usunKurs(scan);
-            break;
-        default:
-            break;
-        }
-    }
-
-    public static void usunOsobe(Scanner scan) {
+    public static void usunOsobe(int choice, String input) {
         Iterator<Osoba> it = zbiorOsob.iterator();
         System.out.println("Usun po: 1. Imieniu, 2. Nazwisku, 3. Wieku");
-        int input = OperacjeNaDanych.getInt(scan);
-        switch (input) {
+        switch (choice) {
         case 1:
             System.out.print("Podaj imie: ");
-            String temp = OperacjeNaDanych.getString(scan);
+            String temp = input;
             while (it.hasNext()) {
                 if (it.next().getImie().equals(temp)) {
                     it.remove();
@@ -205,7 +124,7 @@ public class Lista5 {
             break;
         case 2:
             System.out.print("Podaj nazwisko: ");
-            String temp2 = OperacjeNaDanych.getString(scan);
+            String temp2 = input;
             while (it.hasNext()) {
                 if (it.next().getNazwisko().equals(temp2)) {
                     it.remove();
@@ -214,7 +133,7 @@ public class Lista5 {
             break;
         case 3:
             System.out.print("Podaj wiek: ");
-            int temp3 = OperacjeNaDanych.getInt(scan);
+            int temp3 = Integer.parseInt(input);
             while (it.hasNext()) {
                 if (it.next().getWiek() == temp3) {
                     it.remove();
@@ -226,14 +145,13 @@ public class Lista5 {
         }
     }
 
-    public static void usunKurs(Scanner scan) {
+    public static void usunKurs(int choice, String input) {
         Iterator<Kurs> it = zbiorDostepnychKursow.iterator();
         System.out.println("Usun po: 1. Nazwisku prowadzacego, 2. Punktach ECTS");
-        int input = OperacjeNaDanych.getInt(scan);
-        switch (input) {
+        switch (choice) {
         case 1:
             System.out.print("Podaj nazwisko: ");
-            String temp = OperacjeNaDanych.getString(scan);
+            String temp = input;
             while (it.hasNext()) {
                 if (it.next().getNazwiskoProwadzacego().equals(temp)) {
                     it.remove();
@@ -242,7 +160,7 @@ public class Lista5 {
             break;
         case 2:
             System.out.print("Podaj ECTS: ");
-            int temp2 = OperacjeNaDanych.getInt(scan);
+            int temp2 = Integer.parseInt(input);
             while (it.hasNext()) {
                 if (it.next().getPunktyECTS() == temp2) {
                     it.remove();
@@ -253,14 +171,6 @@ public class Lista5 {
             break;
         }
     }
-
-    /*
-     * public static void wyszukaj(Scanner scan) {
-     * System.out.println("Wyszukaj: 1. Pracownika, 2. Studenta, 3. Kurs"); String s
-     * = ""; switch (x) { case 1: s = wyszukajPracownika(); break; case 2:
-     * wyszukajStudenta(scan); break; case 3: wyszukajKurs(scan); break; default:
-     * break; } }
-     */
 
     public static String wyszukajPracownika(int x, String input) {
         System.out.println("Wyszukaj po: 1.Nazwisko, 2.Staz");
@@ -326,39 +236,20 @@ public class Lista5 {
             String zapytanieStr = input;
             for (Kurs k : zbiorDostepnychKursow) {
                 if (k.getNazwiskoProwadzacego().equals(zapytanieStr)) {
-                    suma += k.toString();
+                    suma += k.toString() + "\n";
                 }
-                suma += "\n";
+                System.out.println(k.getNazwiskoProwadzacego());
+                System.out.println(zapytanieStr);
             }
         } else if (x == 2) {
             int zapytanie = Integer.parseInt(input);
             for (Kurs k : zbiorDostepnychKursow) {
                 if (k.getPunktyECTS() == zapytanie) {
-                    suma += k.toString();
+                    suma += k.toString() + "\n";
                 }
-                suma += "\n";
             }
         }
         return suma;
-    }
-
-    public static void posortuj(Scanner scan) {
-        System.out.println("Posortuj 1. Pracownikow i studentow, 2. Kursy");
-        int wybor = OperacjeNaDanych.getInt(scan);
-        switch (wybor) {
-        case 1:
-            System.out.println("Sortuj po: 1. Nazwisko, 2. Nazwisko i Imie, 3. Nazwisko i Wiek");
-            int input = OperacjeNaDanych.getInt(scan);
-            posortujOsoby(input);
-            break;
-        case 2:
-            System.out.println("Sortuj po: 1. Nazwisko prowadzacego, 2. Liczba pkt ECTS");
-            int input2 = OperacjeNaDanych.getInt(scan);
-            posortujKursy(input2);
-            break;
-        default:
-            break;
-        }
     }
 
     public static void posortujOsoby(int input) {
@@ -380,25 +271,29 @@ public class Lista5 {
         }
     }
 
-    public static void posortujKursy(int input) {
+    public static String posortujKursy(int input) {
         ArrayList<Kurs> temp = new ArrayList<Kurs>(zbiorDostepnychKursow);
+        String suma = "";
         switch (input) {
         case 1:
             Collections.sort(temp, porNazwKurs);
             for (Kurs k : temp) {
-                System.out.println(k.toString());
+                suma += k.toString();
+                suma += "\n";
             }
             break;
         case 2:
             Collections.sort(temp, porECTS);
             for (Kurs k : temp) {
-                System.out.println(k.toString());
+                suma += k.toString();
+                suma += "\n";
             }
             break;
         default:
             posortujKursy(1);
             break;
         }
+        return suma;
     }
 
     public static String wyswietlWszystko(int wybor) {
@@ -456,13 +351,13 @@ public class Lista5 {
         return suma;
     }
 
-    public static void usunHashSetem() {
+    public static String usunHashSetem() {
         HashSet<Student> setStudentow = new HashSet<Student>();
         HashSet<PracownikUczelni> setPracownikow = new HashSet<PracownikUczelni>();
+        String suma = "";
 
         for (Osoba o : zbiorOsob) {
             if (o instanceof Student) {
-                System.out.println(o.hashCode());
                 setStudentow.add((Student) o);
             } else if (o instanceof PracownikUczelni) {
                 setPracownikow.add((PracownikUczelni) o);
@@ -470,10 +365,13 @@ public class Lista5 {
         }
 
         for (Student s : setStudentow) {
-            System.out.println(s.toString());
+            suma += s.toString();
+            suma += "\n";
         }
         for (PracownikUczelni p : setPracownikow) {
-            System.out.println(p.toString());
+            suma += p.toString();
+            suma += "\n";
         }
+        return suma;
     }
 }
