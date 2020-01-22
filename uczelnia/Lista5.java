@@ -1,17 +1,19 @@
 package uczelnia;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
 
 import porownywarki.*;
+import gui.*;
 
 public class Lista5 {
 
     static ArrayList<Osoba> zbiorOsob = new ArrayList<Osoba>();
-    static HashSet<Kurs> zbiorDostepnychKursow = new HashSet<Kurs>();
+    public static HashSet<Kurs> zbiorDostepnychKursow = new HashSet<Kurs>();
 
     static PorownajNazwisko porNazw = null;
     static PorownajImie porImie = null;
@@ -27,6 +29,7 @@ public class Lista5 {
         OperacjeNaDanych.wczytajOsoby(zbiorOsob);
         OperacjeNaDanych.wczytajKursy(zbiorDostepnychKursow);
         wczytajPorownywarki();
+        Okienko okno = new Okienko();
 
         while (!czyWyjscie) {
             wyswietlMenu();
@@ -63,13 +66,13 @@ public class Lista5 {
     public static void wywolajOpcje(int wybor, Scanner scan) {
         switch (wybor) {
         case 1:
-            dodajDoKolekcji(scan);
+            // dodajDoKolekcji(0);
             break;
         case 2:
             wyszukaj(scan);
             break;
         case 3:
-            wyswietlWszystko(scan);
+            wyswietlWszystko(0);
             break;
         case 4:
             zbiorOsob.clear();
@@ -89,47 +92,31 @@ public class Lista5 {
         }
     }
 
-    public static void dodajDoKolekcji(Scanner scan) {
-        System.out.println("Dodaj: 1. Pracownika BD, 2. Pracownika Administracyjnego, 3. Studenta, 4. Kurs");
-        int wybor = OperacjeNaDanych.getInt(scan);
+    /*
+     * public static void dodajDoKolekcji(int wybor) { System.out.
+     * println("Dodaj: 1. Pracownika BD, 2. Pracownika Administracyjnego, 3. Studenta, 4. Kurs"
+     * ); String s = ""; switch (wybor) { case 1: s = dodajPracownika(1); break;
+     * case 2: s = dodajPracownika(2); break; case 3: dodajStudenta(); break; case
+     * 4: dodajKurs(new ArrayList<String>()); break; default: break; } }
+     */
 
-        switch (wybor) {
-        case 1:
-            dodajPracownika(scan, 1);
-            break;
-        case 2:
-            dodajPracownika(scan, 2);
-            break;
-        case 3:
-            dodajStudenta(scan);
-            break;
-        case 4:
-            dodajKurs(scan);
-            break;
-        default:
-            break;
-        }
-    }
+    public static void dodajPracownika(int wybor, ArrayList<String> inputList) {
 
-    public static void dodajPracownika(Scanner scan, int wybor) {
-        String imie = OperacjeNaDanych.getString(scan);
-        String nazwisko = OperacjeNaDanych.getString(scan);
-        String PESEL = OperacjeNaDanych.getString(scan);
-        int wiek = OperacjeNaDanych.getInt(scan);
-        String plecStr = OperacjeNaDanych.getString(scan);
+        String imie = inputList.get(0);
+        String nazwisko = inputList.get(1);
+        String PESEL = inputList.get(2);
+        int wiek = Integer.parseInt(inputList.get(3));
+        String plecStr = inputList.get(4);
         Osoba.Plec plec;
-        while (!plecStr.equals("M") && !plecStr.equals("K")) {
-            plecStr = OperacjeNaDanych.getString(scan);
-        }
         if (plecStr.equals("M")) {
             plec = Osoba.Plec.M;
         } else {
             plec = Osoba.Plec.K;
         }
-        int staz = OperacjeNaDanych.getInt(scan);
-        String stanowisko = OperacjeNaDanych.getString(scan);
-        int pensja = OperacjeNaDanych.getInt(scan);
-        int punktacjaLubNadgodziny = OperacjeNaDanych.getInt(scan);
+        int staz = Integer.parseInt(inputList.get(5));
+        String stanowisko = inputList.get(6);
+        int pensja = Integer.parseInt(inputList.get(7));
+        int punktacjaLubNadgodziny = Integer.parseInt(inputList.get(8));
         if (wybor == 1) {
             PracownikBD prac = new PracownikBD(imie, nazwisko, PESEL, wiek, plec, staz, stanowisko, pensja,
                     punktacjaLubNadgodziny);
@@ -141,27 +128,23 @@ public class Lista5 {
         }
     }
 
-    public static void dodajStudenta(Scanner scan) {
-        String imie = OperacjeNaDanych.getString(scan);
-        String nazwisko = OperacjeNaDanych.getString(scan);
-        String PESEL = OperacjeNaDanych.getString(scan);
-        int wiek = OperacjeNaDanych.getInt(scan);
-        String plecStr = OperacjeNaDanych.getString(scan);
+    public static void dodajStudenta(ArrayList<String> inputList, Kurs[] emptyKursy) {
+        String imie = inputList.get(0);
+        String nazwisko = inputList.get(1);
+        String PESEL = inputList.get(2);
+        int wiek = Integer.parseInt(inputList.get(3));
+        String plecStr = inputList.get(4);
         Osoba.Plec plec;
-        while (!plecStr.equals("M") && !plecStr.equals("K")) {
-            plecStr = OperacjeNaDanych.getString(scan);
-        }
         if (plecStr.equals("M")) {
             plec = Osoba.Plec.M;
         } else {
             plec = Osoba.Plec.K;
         }
-        String nrIndeksu = OperacjeNaDanych.getString(scan);
-        HashSet<Kurs> kursyStudenta = new HashSet<Kurs>();
-        przydzielKursy(kursyStudenta, scan);
-        boolean czyERASMUS = OperacjeNaDanych.getBoolean(scan);
-        boolean czy1Stopien = OperacjeNaDanych.getBoolean(scan);
-        boolean czyStacjonarne = OperacjeNaDanych.getBoolean(scan);
+        String nrIndeksu = inputList.get(5);
+        HashSet<Kurs> kursyStudenta = new HashSet<Kurs>(Arrays.asList(emptyKursy));
+        boolean czyERASMUS = Boolean.parseBoolean(inputList.get(6));
+        boolean czy1Stopien = Boolean.parseBoolean(inputList.get(7));
+        boolean czyStacjonarne = Boolean.parseBoolean(inputList.get(8));
         Student stud = new Student(imie, nazwisko, PESEL, wiek, plec, nrIndeksu, kursyStudenta, czyERASMUS, czy1Stopien,
                 czyStacjonarne);
         zbiorOsob.add(stud);
@@ -182,11 +165,11 @@ public class Lista5 {
         }
     }
 
-    public static void dodajKurs(Scanner scan) {
-        String nazwa = OperacjeNaDanych.getString(scan);
-        String imieProwadzacego = OperacjeNaDanych.getString(scan);
-        String nazwiskoProwadzacego = OperacjeNaDanych.getString(scan);
-        int punktyECTS = OperacjeNaDanych.getInt(scan);
+    public static void dodajKurs(ArrayList<String> lista) {
+        String nazwa = lista.get(0);
+        String imieProwadzacego = lista.get(1);
+        String nazwiskoProwadzacego = lista.get(2);
+        int punktyECTS = Integer.parseInt(lista.get(3));
         Kurs k = new Kurs(nazwa, imieProwadzacego, nazwiskoProwadzacego, punktyECTS);
         zbiorDostepnychKursow.add(k);
     }
@@ -420,66 +403,75 @@ public class Lista5 {
         }
     }
 
-    public static void wyswietlWszystko(Scanner scan) {
+    public static String wyswietlWszystko(int wybor) {
         System.out.println("Wyswietl wszystkich: 1.Pracownikow, 2.Studentow, 3.Kursy");
-        int x = OperacjeNaDanych.getInt(scan);
-        switch (x) {
+        String s = "";
+        switch (wybor) {
         case 1:
-            wyswietlPracownikow();
+            s = wyswietlPracownikow();
             break;
         case 2:
-            wyswietlStudentow();
+            s = wyswietlStudentow();
             break;
         case 3:
-            wyswietlKursy();
+            s = wyswietlKursy();
             break;
         default:
             break;
         }
+        return s;
     }
 
-    public static void wyswietlPracownikow() {
+    public static String wyswietlPracownikow() {
+        String suma = "";
         for (Osoba k : zbiorOsob) {
             if (k instanceof PracownikBD) {
                 PracownikBD temp = (PracownikBD) k;
-                System.out.println(temp.toString());
+                suma += temp.toString();
             } else if (k instanceof PracownikAdministracyjny) {
                 PracownikAdministracyjny temp = (PracownikAdministracyjny) k;
-                System.out.println(temp.toString());
+                suma += temp.toString();
             }
+            suma += "\n";
         }
+        return suma;
     }
 
-    public static void wyswietlStudentow() {
+    public static String wyswietlStudentow() {
+        String suma = "";
         for (Osoba k : zbiorOsob) {
             if (k instanceof Student) {
                 Student temp = (Student) k;
-                System.out.println(temp.toString());
+                suma += temp.toString();
             }
+            suma += "\n";
         }
+        return suma;
     }
 
-    public static void wyswietlKursy() {
+    public static String wyswietlKursy() {
+        String suma = "";
         for (Kurs k : zbiorDostepnychKursow) {
-            System.out.println(k.toString());
+            suma += k.toString();
+            suma += "\n";
         }
+        return suma;
     }
 
     public static void usunHashSetem() {
         HashSet<Student> setStudentow = new HashSet<Student>();
         HashSet<PracownikUczelni> setPracownikow = new HashSet<PracownikUczelni>();
-        
+
         for (Osoba o : zbiorOsob) {
             if (o instanceof Student) {
                 System.out.println(o.hashCode());
                 setStudentow.add((Student) o);
-            }
-            else if (o instanceof PracownikUczelni) {
+            } else if (o instanceof PracownikUczelni) {
                 setPracownikow.add((PracownikUczelni) o);
             }
         }
 
-        for (Student s : setStudentow){
+        for (Student s : setStudentow) {
             System.out.println(s.toString());
         }
         for (PracownikUczelni p : setPracownikow) {

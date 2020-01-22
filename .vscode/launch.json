@@ -5,6 +5,13 @@
             "name": "CodeLens (Launch) - Lista5",
             "request": "launch",
             "mainClass": "uczelnia.Lista5",
+            "projectName": "lista5_873dc903"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Lista5",
+            "request": "launch",
+            "mainClass": "uczelnia.Lista5",
             "projectName": "lista5_c34036bd"
         },
         {
