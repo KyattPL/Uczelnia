@@ -12,7 +12,7 @@ import gui.*;
 
 public class Lista5 {
 
-    static ArrayList<Osoba> zbiorOsob = new ArrayList<Osoba>();
+    public static ArrayList<Osoba> zbiorOsob = new ArrayList<Osoba>();
     public static HashSet<Kurs> zbiorDostepnychKursow = new HashSet<Kurs>();
 
     static PorownajNazwisko porNazw = null;
@@ -69,7 +69,7 @@ public class Lista5 {
             // dodajDoKolekcji(0);
             break;
         case 2:
-            wyszukaj(scan);
+            // wyszukaj(scan);
             break;
         case 3:
             wyswietlWszystko(0);
@@ -254,94 +254,92 @@ public class Lista5 {
         }
     }
 
-    public static void wyszukaj(Scanner scan) {
-        System.out.println("Wyszukaj: 1. Pracownika, 2. Studenta, 3. Kurs");
-        int x = OperacjeNaDanych.getInt(scan);
-        switch (x) {
-        case 1:
-            wyszukajPracownika(scan);
-            break;
-        case 2:
-            wyszukajStudenta(scan);
-            break;
-        case 3:
-            wyszukajKurs(scan);
-            break;
-        default:
-            break;
-        }
-    }
+    /*
+     * public static void wyszukaj(Scanner scan) {
+     * System.out.println("Wyszukaj: 1. Pracownika, 2. Studenta, 3. Kurs"); String s
+     * = ""; switch (x) { case 1: s = wyszukajPracownika(); break; case 2:
+     * wyszukajStudenta(scan); break; case 3: wyszukajKurs(scan); break; default:
+     * break; } }
+     */
 
-    public static void wyszukajPracownika(Scanner scan) {
+    public static String wyszukajPracownika(int x, String input) {
         System.out.println("Wyszukaj po: 1.Nazwisko, 2.Staz");
-        int x = OperacjeNaDanych.getInt(scan);
-
+        String suma = "";
         if (x == 1) {
-            String zapytanieStr = OperacjeNaDanych.getString(scan);
+            String zapytanieStr = input;
             for (Osoba k : zbiorOsob) {
                 if (k instanceof PracownikUczelni) {
                     if (k.getNazwisko().equals(zapytanieStr)) {
-                        System.out.println(k.toString());
+                        suma += k.toString();
                     }
                 }
+                suma += "\n";
             }
         } else if (x == 2) {
-            int zapytanie = OperacjeNaDanych.getInt(scan);
+            int zapytanie = Integer.parseInt(input);
             for (Osoba k : zbiorOsob) {
                 if (k instanceof PracownikUczelni) {
                     PracownikUczelni prac = (PracownikUczelni) k;
                     if (prac.getStaz() == zapytanie) {
-                        System.out.println(k.toString());
+                        suma += k.toString();
                     }
                 }
+                suma += "\n";
             }
         }
+        return suma;
     }
 
-    public static void wyszukajStudenta(Scanner scan) {
+    public static String wyszukajStudenta(int x, String input) {
         System.out.println("Wyszukaj po: 1.Nazwisko, 2.Czy 1 stopien");
-        int x = OperacjeNaDanych.getInt(scan);
+        String suma = "";
         if (x == 1) {
-            String zapytanieStr = OperacjeNaDanych.getString(scan);
+            String zapytanieStr = input;
             for (Osoba k : zbiorOsob) {
                 if (k instanceof Student) {
                     Student stud = (Student) k;
                     if (stud.getNazwisko().equals(zapytanieStr)) {
-                        System.out.println(k.toString());
+                        suma += k.toString();
                     }
                 }
+                suma += "\n";
             }
         } else if (x == 2) {
-            boolean zapytanieBool = OperacjeNaDanych.getBoolean(scan);
+            boolean zapytanieBool = Boolean.parseBoolean(input);
             for (Osoba k : zbiorOsob) {
                 if (k instanceof Student) {
                     Student stud = (Student) k;
                     if (stud.getCzy1Stopien() == zapytanieBool) {
-                        System.out.println(k.toString());
+                        suma += k.toString();
                     }
                 }
+                suma += "\n";
             }
         }
+        return suma;
     }
 
-    public static void wyszukajKurs(Scanner scan) {
+    public static String wyszukajKurs(int x, String input) {
         System.out.println("Wyszukaj po: 1.Nazwisko prowadzacego, 2.Punkty ECTS");
-        int x = OperacjeNaDanych.getInt(scan);
+        String suma = "";
         if (x == 1) {
-            String zapytanieStr = OperacjeNaDanych.getString(scan);
+            String zapytanieStr = input;
             for (Kurs k : zbiorDostepnychKursow) {
                 if (k.getNazwiskoProwadzacego().equals(zapytanieStr)) {
-                    System.out.println(k.toString());
+                    suma += k.toString();
                 }
+                suma += "\n";
             }
         } else if (x == 2) {
-            int zapytanie = OperacjeNaDanych.getInt(scan);
+            int zapytanie = Integer.parseInt(input);
             for (Kurs k : zbiorDostepnychKursow) {
                 if (k.getPunktyECTS() == zapytanie) {
-                    System.out.println(k.toString());
+                    suma += k.toString();
                 }
+                suma += "\n";
             }
         }
+        return suma;
     }
 
     public static void posortuj(Scanner scan) {

@@ -7,12 +7,13 @@ import uczelnia.Kurs;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
 public class Okienko {
 
-    JButton przycisk1, przycisk2, przycisk3, przycisk4, przycisk5, przycisk6, przycisk7, przycisk8;
+    JButton przycisk1, przycisk2, przycisk3, przycisk4, przycisk5, przycisk6, przycisk7, przycisk8, przycisk9;
     JFrame ramka;
     JPanel container, panel1, panel2;
     JTextArea text;
@@ -30,11 +31,15 @@ public class Okienko {
         przycisk5 = new JButton("5. Posortuj");
         przycisk6 = new JButton("6. Usun po kluczu");
         przycisk7 = new JButton("7. Usun HashSetem");
-        przycisk8 = new JButton("8. Wyjdz");
+        przycisk8 = new JButton("8. Zapisz");
+        przycisk9 = new JButton("9. Wyjdz");
 
         przycisk1.addActionListener(new Przycisk1());
+        przycisk2.addActionListener(new Przycisk2());
         przycisk3.addActionListener(new Przycisk3());
+        przycisk4.addActionListener(new Przycisk4());
         przycisk8.addActionListener(new Przycisk8());
+        przycisk9.addActionListener(new Przycisk9());
 
         ramka.getContentPane().add(panel1);
         ramka.getContentPane().add(panel2);
@@ -52,8 +57,10 @@ public class Okienko {
         panel1.add(przycisk6);
         panel1.add(przycisk7);
         panel1.add(przycisk8);
+        panel1.add(przycisk9);
         panel2.add(text);
         text.setEnabled(false);
+        text.setDisabledTextColor(Color.BLACK);
         text.setLineWrap(true);
         ramka.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ramka.pack();
@@ -125,6 +132,49 @@ public class Okienko {
         }
     }
 
+    class Przycisk2 implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JList<String> possibleValues = new JList<String>(new String[] { "Pracownika", "Studenta", "Kurs" });
+            JOptionPane.showMessageDialog(null, possibleValues, "Wyszukaj", JOptionPane.PLAIN_MESSAGE);
+            int index = possibleValues.getSelectedIndex() + 1;
+            text.setText("");
+            text.append(wyszukajPo(index));
+        }
+
+        public String wyszukajPo(int index) {
+            JList<String> possibleValues;
+            String s = "";
+            switch (index) {
+            case 1:
+                possibleValues = new JList<String>(new String[] { "Nazwisko", "Staz" });
+                JOptionPane.showMessageDialog(null, possibleValues, "Szukaj po", JOptionPane.PLAIN_MESSAGE);
+                int choice = possibleValues.getSelectedIndex() + 1;
+                String input = JOptionPane.showInputDialog(null, "Wprowadz", "Podaj", JOptionPane.OK_OPTION);
+                s = uczelnia.Lista5.wyszukajPracownika(choice, input);
+                break;
+            case 2:
+                possibleValues = new JList<String>(new String[] { "Nazwisko", "Czy 1 stopien" });
+                JOptionPane.showMessageDialog(null, possibleValues, "Szukaj po", JOptionPane.PLAIN_MESSAGE);
+                int choice2 = possibleValues.getSelectedIndex() + 1;
+                String input2 = JOptionPane.showInputDialog(null, "Wprowadz", "Podaj", JOptionPane.OK_OPTION);
+                s = uczelnia.Lista5.wyszukajStudenta(choice2, input2);
+                break;
+            case 3:
+                possibleValues = new JList<String>(new String[] { "Nazwisko", "ECTS" });
+                JOptionPane.showMessageDialog(null, possibleValues, "Szukaj po", JOptionPane.PLAIN_MESSAGE);
+                int choice3 = possibleValues.getSelectedIndex() + 1;
+                String input3 = JOptionPane.showInputDialog(null, "Wprowadz", "Podaj", JOptionPane.OK_OPTION);
+                s = uczelnia.Lista5.wyszukajKurs(choice3, input3);
+                break;
+            default:
+                break;
+            }
+            return s;
+        }
+    }
+
     class Przycisk3 implements ActionListener {
 
         @Override
@@ -137,11 +187,29 @@ public class Okienko {
         }
     }
 
+    class Przycisk4 implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            uczelnia.Lista5.zbiorDostepnychKursow.clear();
+            uczelnia.Lista5.zbiorOsob.clear();
+        }
+    }
+
     class Przycisk8 implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == przycisk8) {
+            uczelnia.OperacjeNaDanych.zapiszKursy(uczelnia.Lista5.zbiorDostepnychKursow);
+            uczelnia.OperacjeNaDanych.zapiszOsoby(uczelnia.Lista5.zbiorOsob);
+        }
+    }
+
+    class Przycisk9 implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == przycisk9) {
                 ramka.dispatchEvent(new WindowEvent(ramka, WindowEvent.WINDOW_CLOSING));
             }
         }
