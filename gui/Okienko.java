@@ -123,10 +123,8 @@ public class Okienko {
         }
 
         public int numberOfInputs(int choice) {
-            if (choice == 1 || choice == 2) {
+            if (choice == 1 || choice == 2 || choice == 3) {
                 return 9;
-            } else if (choice == 3) {
-                return 10;
             } else if (choice == 4) {
                 return 4;
             } else {
