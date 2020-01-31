@@ -321,11 +321,12 @@ public class Lista5 {
             if (k instanceof PracownikBD) {
                 PracownikBD temp = (PracownikBD) k;
                 suma += temp.toString();
+                suma += "\n";
             } else if (k instanceof PracownikAdministracyjny) {
                 PracownikAdministracyjny temp = (PracownikAdministracyjny) k;
                 suma += temp.toString();
+                suma += "\n";
             }
-            suma += "\n";
         }
         return suma;
     }
@@ -336,8 +337,8 @@ public class Lista5 {
             if (k instanceof Student) {
                 Student temp = (Student) k;
                 suma += temp.toString();
+                suma += "\n";
             }
-            suma += "\n";
         }
         return suma;
     }
